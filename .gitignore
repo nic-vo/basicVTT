@@ -3,4 +3,4 @@
 .pnp**
 yarn.lock
 .next
-.next-env.d.ts
+next-env.d.ts

@@ -8,8 +8,9 @@
 		a. any "-->", which indicates a cue timestamp
 		b. the next blank line, indicating end of cue
 	5.	Identify all lines that contain cue data, not markers
-	6.	Temp store cue data as
-
+	6.	Temp store cue data as separate array
+	7.	Split the cue payloads into chunks such that the total char count
+		of each chunk is comfortably under 5000 (Google translate limit)
 */
 
 // ASSUME ALL INPUT HAS BEEN NON-CRLF

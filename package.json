@@ -5,9 +5,11 @@
   },
   "packageManager": "yarn@4.5.1",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.3.0",
     "next": "^15.0.3",
     "react": "18",
-    "react-dom": "18"
+    "react-dom": "18",
+    "react-redux": "^9.1.2"
   },
   "devDependencies": {
     "@types/node": "20",

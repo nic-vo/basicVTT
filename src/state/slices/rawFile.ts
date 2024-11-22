@@ -1,23 +1,33 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { segmentedPayload } from 'lib/parsing';
+import { type NonNullState } from '../helpers';
 
 export type rawFileState = {
-	rawFile: null | string[];
+	separatedFile: null | string[];
+	name: null | string;
+	rawChunks: null | segmentedPayload;
 };
 
-const initialState: rawFileState = { rawFile: null };
+const initialState: rawFileState = {
+	separatedFile: null,
+	name: null,
+	rawChunks: null,
+};
 
 const rawFileSlice = createSlice({
 	name: 'rawFile',
 	initialState,
 	reducers: {
-		inputChange: (state, action: PayloadAction<string[]>) => {
-			state.rawFile = action.payload;
+		ingestFile: (state, action: PayloadAction<NonNullState<rawFileState>>) => {
+			state.separatedFile = action.payload.separatedFile;
+			state.name = action.payload.name;
 		},
-		inputClear: (state) => {
-			state.rawFile = null;
+		clearFile: (state) => {
+			state.separatedFile = null;
+			state.name = null;
 		},
 	},
 });
 
-export const { inputChange, inputClear } = rawFileSlice.actions;
+export const { ingestFile, clearFile } = rawFileSlice.actions;
 export default rawFileSlice.reducer;

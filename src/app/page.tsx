@@ -1,8 +1,9 @@
-import { UploadForm } from './_client';
+import Link from 'next/link';
 
 const Home = () => (
 	<main className='p-8 flex flex-col items-center gap-16'>
 		<h1 className='text-center font-bold text-6xl'>.vtt Repacker</h1>
+		<Link href='/ingest'>Start</Link>
 		<section className='flex flex-col gap-8'>
 			<h2 className='font-bold text-3xl text-center'>Tool process</h2>
 			<ul className='list-decimal max-w-prose flex flex-col gap-4'>
@@ -68,7 +69,6 @@ const Home = () => (
 				</li>
 			</ul>
 		</section>
-		<UploadForm />
 	</main>
 );
 

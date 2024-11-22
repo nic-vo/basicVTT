@@ -28,7 +28,7 @@ type payloadPart = {
 	};
 };
 
-type segmentedPayload = { lineIndex: number; parts: payloadPart[] };
+export type segmentedPayload = { [key: number]: payloadPart[] };
 
 /*
 	twoDimensions tuple
@@ -47,7 +47,7 @@ export const parseOutCuePayloads = (input: string) => {
 	const separated = toLF(input).split('\n');
 
 	// Actual cues, parsed for tags and some whitespace info
-	let output: segmentedPayload[] = [];
+	let output: segmentedPayload = {};
 	// Flag if a cue contains metadata to skip parsing as a translateable cue
 	let metadataDetectedFlag = false;
 	let writeFlag = false;
@@ -82,18 +82,15 @@ export const parseOutCuePayloads = (input: string) => {
 				/<[^>]*>/.test(complexPayload) === false &&
 				/^(—|—|-)/.test(complexPayload[0]) === false
 			) {
-				output.push({
-					lineIndex: i,
-					parts: [
-						{
-							data: complexPayload,
-							translate: true,
-							unTrim: { start: false, end: false },
-						},
-					],
-				});
+				output[i] = [
+					{
+						data: complexPayload,
+						translate: true,
+						unTrim: { start: false, end: false },
+					},
+				];
 			} else {
-				output.push({ lineIndex: i, parts: segmentPayload(complexPayload) });
+				output[i] = segmentPayload(complexPayload);
 			}
 		}
 	}
